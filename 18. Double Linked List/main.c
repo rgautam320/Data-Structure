@@ -1,4 +1,7 @@
-//Double Linked List Implementation
+/* ------------------------- 19BCP101 -----------------------*/
+/* ----------------------- Rajan Gautam ---------------------*/
+
+//Doubly Linked List Implementation
 #include <stdio.h>
 #include <stdlib.h>
 //Declaring the structures and functions
@@ -10,18 +13,22 @@ struct node
 };
 struct node * root = NULL;
 int len;
-void addend();
-void addbegin();
-void addafter();
-int length();
-void display();
-void del();
-void reverse();
-void swap();
+void addend(void);
+void addbegin(void);
+void addafter(void);
+int length(void);
+void display(void);
+void reverse(void);
+int search(int value);
+void swap(void);
+void del(void);
+void delvalue(int value);
+void dellist(void);
+
 //Writing inside the main function
 int main()
 {
-    int choice;
+    int choice, value;
     while(1)
     {
         printf("Double Linked List Operations : \n");
@@ -31,9 +38,12 @@ int main()
         printf("4. Length\n");
         printf("5. Display\n");
         printf("6. Reverse\n");
-        printf("7. Swap\n");
-        printf("8. Delete\n");
-        printf("9. Exit\n");
+        printf("7. Search\n");
+        printf("8. Swap\n");
+        printf("9. Delete\n");
+        printf("10. Delete Value\n");
+        printf("11. Delete List\n");
+        printf("12. Exit\n");
         printf("Enter your choice : ");
         scanf("%d", &choice);
         switch(choice)
@@ -58,16 +68,38 @@ int main()
             reverse();
             break;
         case 7:
+            printf("Enter a value to search : ");
+            scanf("%d", &value);
+            if(search(value) == 1)
+            {
+                printf("%d found in the list.\n\n", value);
+            }
+            else
+            {
+                printf("%d not found in the list.\n\n", value);
+            }
+            break;
+
+        case 8:
             swap();
             break;
-        case 8:
+        case 9:
             del();
             break;
-        case 9:
-            exit(1);
+        case 10:
+            printf("Enter the value to delete : ");
+            scanf("%d", &value);
+            delvalue(value);
+            printf("\n\n");
+            break;
+        case 11:
+            dellist();
+            break;
+        case 12:
+            exit(0);
             break;
         default:
-            printf("Invalid Choice\n");
+            printf("Invalid Choice\n\n");
         }
     }
     return 0;
@@ -201,6 +233,23 @@ void reverse()
         printf("\n\n");
     }
 }
+//This function search the value in the list
+int search(int value)
+{
+    struct node *p = root;
+    while(p != NULL)
+    {
+        if(p->data == value)
+        {
+            return 1;
+        }
+        else
+        {
+            p = p->right;
+        }
+    }
+    return 0;
+}
 //This will swap the two element in the list
 void swap()
 {
@@ -264,5 +313,53 @@ void del()
         q->left = p;
         free(temp);
     }
+}
+//This function delete the given value from the list
+void delvalue(int value)
+{
+    struct node* temp = root, *p, *q;
+    //q = root->right;
+    if(root->data == value)
+    {
+        root = temp->right;
+        free(temp);
+    }
+    else if(search(value) == 1)
+    {
+        while(temp->data != value)
+        {
+            temp = temp->right;
+        }
+        q = temp->right;
+        p = temp->left;
+        if(temp->right != NULL)
+        {
+            p->right = q;
+            q->left = p;
+            free(temp);
+        }
+        else
+        {
+            p->right = NULL;
+            free(temp);
+        }
+    }
+    else
+    {
+        printf("Value not found in the list.\n\n");
+    }
+}
+//This function deletes the whole list
+void dellist()
+{
+    struct node *temp = root, *p;
+    while(temp != NULL)
+    {
+        p = temp->right;
+        free(temp);
+        temp = p;
+    }
+    printf("All the elements in the list deleted successfully.\n\n");
+    root = NULL;
 }
 

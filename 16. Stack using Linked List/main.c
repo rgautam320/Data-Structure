@@ -1,3 +1,6 @@
+/* ------------------------- 19BCP101 -----------------------*/
+/* ----------------------- Rajan Gautam ---------------------*/
+
 //Implementation of Stack using Linked List
 #include <stdio.h>
 #include <stdlib.h>

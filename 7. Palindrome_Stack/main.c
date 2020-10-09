@@ -1,3 +1,6 @@
+/* ------------------------- 19BCP101 -----------------------*/
+/* ----------------------- Rajan Gautam ---------------------*/
+
 //Checking whether the string is Palindrome or not
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,3 +1,6 @@
+/* ------------------------- 19BCP101 -----------------------*/
+/* ----------------------- Rajan Gautam ---------------------*/
+
 //Stack Implementation using static array
 #include <stdio.h>
 #include <stdlib.h>
